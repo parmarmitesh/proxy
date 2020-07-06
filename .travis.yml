@@ -10,7 +10,7 @@ addons:
     packages:
     - build-essential
     - manpages-dev
-    - gcc-4.9
+    - gcc-4.9-base
     - g++-4.9
     - realpath
     - wget

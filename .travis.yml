@@ -19,7 +19,6 @@ env:
   - BAZEL_VERSION=0.4.5
   
 script:
-  - script/check-style
   - gcc -v
 
 

@@ -1,14 +1,24 @@
 sudo: required
 
-arch: ppc64le
 dist: trusty
 
+
+  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+  - sudo apt-get -q update
+  - sudo apt-get install gcc-5
+  - sudo apt-get install software-properties-common
+  - sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa
+  - sudo apt-get update
+  - sudo apt-get install gcc-4.9
+  - update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 10
 
 addons:
   apt:
     sources:
     - ubuntu-toolchain-r-test
     packages:
+    - gcc-4.9
+    - g++-4.9
     - realpath
     - wget
 
@@ -31,14 +41,6 @@ cache:
     - $HOME/clang
 
 before_install:
-  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-  - sudo apt-get -q update
-  - sudo apt-get install gcc-5
-  - sudo apt-get install software-properties-common
-  - sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa
-  - sudo apt-get update
-  - sudo apt-get install gcc-4.9
-  - update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 10
   - mkdir -p ${HOME}/bazel/install
   - cd ${HOME}/bazel/install
   - wget --no-clobber "https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel_${BAZEL_VERSION}-linux-x86_64.deb"
@@ -55,5 +57,3 @@ script:
 
 notifications:
   slack: istio-dev:wEEEbaabdP5ieCgDOFetA9nX
-
-    

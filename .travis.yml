@@ -1,6 +1,5 @@
 sudo: required
 
-dist: trusty
 
 arch: ppc64le
 

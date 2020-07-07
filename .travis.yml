@@ -7,9 +7,9 @@ addons:
   apt:
     sources:
     - ubuntu-toolchain-r-test
-    - software-properties-common
+    
     packages:
-    - gcc-4.9
+    - software-properties-common
 
 env:
   - BAZEL_VERSION=0.4.5

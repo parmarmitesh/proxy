@@ -7,6 +7,7 @@ addons:
   apt:
     sources:
     - ubuntu-toolchain-r-test
+    - ubuntu-toolchain-r/ppa
     packages:
     - software-properties-common
     - gcc

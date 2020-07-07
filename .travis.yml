@@ -3,13 +3,18 @@ sudo: required
 arch: ppc64le
 dist: trusty
 
+before_install:
+   - apt-get install software-properties-common
+   - add-apt-repository ppa:ubuntu-toolchain-r/ppa
+   - apt-get update
+
 addons:
   apt:
     sources:
     - ubuntu-toolchain-r-test
     
     packages:
-    - software-properties-common
+    - gcc-4.9
 
 env:
   - BAZEL_VERSION=0.4.5

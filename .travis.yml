@@ -11,7 +11,7 @@ addons:
     packages:
     - software-properties-common
     - gcc
-    - gcc-4.9
+    - gcc-5
 
 branches:
   except:

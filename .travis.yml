@@ -13,3 +13,4 @@ before_install:
   
   script:
     - gcc -v
+    - g++ -v

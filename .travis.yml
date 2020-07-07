@@ -9,12 +9,6 @@ addons:
     - ubuntu-toolchain-r-test
     packages:
     - gcc
-    - g++
-    - gcc-4.9
-    - g++-4.9
-    - update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 10
-    - realpath
-    - wget
 
 branches:
   except:

@@ -43,6 +43,7 @@ before_install:
   - cat tools/bazel.rc.travis tools/bazel.rc.orig > tools/bazel.rc
 
 script:
+  - gcc -v
   - script/check-style
   - CC=/usr/bin/gcc-4.9 CXX=/usr/bin/g++-4.9 bazel --output_base=${HOME}/bazel/outbase test //...
 

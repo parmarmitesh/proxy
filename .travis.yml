@@ -7,8 +7,8 @@ addons:
   apt:
     sources:
     - ubuntu-toolchain-r-test
-    packages:
     - software-properties-common
+    packages:
     - gcc-4.9
 
 env:

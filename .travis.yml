@@ -8,10 +8,11 @@ addons:
     sources:
     - ubuntu-toolchain-r-test
     packages:
-    - build-essential
-    - manpages-dev
-    - gcc-4.9-base
+    - gcc
+    - g++
+    - gcc-4.9
     - g++-4.9
+    - update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 10
     - realpath
     - wget
 

@@ -44,8 +44,11 @@ before_install:
   - sudo apt-get -f install -qqy uuid-dev
   - cd ${TRAVIS_BUILD_DIR}
   - cd tools
+  - sudo install -y mlocate
+  - updatedb
+  - locate bazel.rc
+  - locate bazel
   - ls
-  - ls -l
   - mv tools/bazel.rc tools/bazel.rc.orig
   - cat tools/bazel.rc.travis tools/bazel.rc.orig > tools/bazel.rc
 

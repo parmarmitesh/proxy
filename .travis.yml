@@ -43,6 +43,7 @@ before_install:
   - sudo dpkg -i bazel_${BAZEL_VERSION}-linux-x86_64.deb
   - sudo apt-get -f install -qqy uuid-dev
   - cd ${TRAVIS_BUILD_DIR}
+  - cd tools
   - ls
   - ls -l
   - mv tools/bazel.rc tools/bazel.rc.orig

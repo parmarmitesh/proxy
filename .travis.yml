@@ -2,6 +2,54 @@ sudo: required
 
 arch: ppc64le
 
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+
+
+branches:
+  except:
+  - stable
+
+language: cpp
+
 jdk:
   - oraclejdk8
 
+env:
+  - BAZEL_VERSION=0.4.5
+
+cache:
+  directories:
+    - $HOME/bazel/install
+    - $HOME/bazel/outbase
+    - $HOME/clang
+
+before_install:
+  - sudo apt-get update
+  - sudo apt-get -y install software-properties-common
+  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/ppa
+  - sudo apt-get update
+  - sudo apt-get install -y gcc-4.9 g++-4.9
+  - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 60 --slave /usr/bin/g++ g++ /usr/bin/g++-4.9
+  - sudo apt-get install wget
+  - sudo apt-get install realpath
+  - mkdir -p ${HOME}/bazel/install
+  - cd ${HOME}/bazel/install
+  - wget --no-clobber "https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel_${BAZEL_VERSION}-linux-x86_64.deb"
+  - chmod +x bazel_${BAZEL_VERSION}-linux-x86_64.deb
+  - dpkg --add-architecture amd64
+  - dpkg --print-foreign-architectures
+  - sudo dpkg -i bazel_${BAZEL_VERSION}-linux-x86_64.deb
+  - sudo apt-get -f install -qqy uuid-dev
+  - cd ${TRAVIS_BUILD_DIR}
+  - mv tools/bazel.rc tools/bazel.rc.orig
+  - cat tools/bazel.rc.travis tools/bazel.rc.orig > tools/bazel.rc
+
+script:
+  - script/check-style
+  - CC=/usr/bin/gcc-4.9 CXX=/usr/bin/g++-4.9 bazel --output_base=${HOME}/bazel/outbase test //...
+
+notifications:
+  slack: istio-dev:wEEEbaabdP5ieCgDOFetA9nX

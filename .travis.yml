@@ -36,6 +36,8 @@ before_install:
   - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 60 --slave /usr/bin/g++ g++ /usr/bin/g++-4.9
   - sudo apt-get install wget
   - sudo apt-get install realpath
+  - sudo apt-get install -y mlocate
+  - updatedb
   - mkdir -p ${HOME}/bazel/install
   - cd ${HOME}/bazel/install
   - wget --no-clobber "https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel_${BAZEL_VERSION}-linux-x86_64.deb"
@@ -44,10 +46,9 @@ before_install:
   - sudo apt-get -f install -qqy uuid-dev
   - cd ${TRAVIS_BUILD_DIR}
   - cd tools
-  - sudo apt-get install -y mlocate
-  - locate bazel.rc
   - locate bazel
   - ls
+  - locate bazel.rc
   - mv tools/bazel.rc tools/bazel.rc.orig
   - cat tools/bazel.rc.travis tools/bazel.rc.orig > tools/bazel.rc
 

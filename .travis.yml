@@ -1,7 +1,7 @@
 sudo: required
 
 arch: 
-  - amd64
+  - ppc64le
 
 addons:
   apt:
@@ -36,18 +36,19 @@ before_install:
   - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 60 --slave /usr/bin/g++ g++ /usr/bin/g++-4.9
   - sudo apt-get install wget
   - sudo apt-get install realpath
+  - sudo apt-get install pkg-config zip zlib1g-dev unzip python
   - mkdir -p ${HOME}/bazel/install
   - cd ${HOME}/bazel/install
-  - wget --no-clobber "https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel_${BAZEL_VERSION}-linux-x86_64.deb"
-  - chmod +x bazel_${BAZEL_VERSION}-linux-x86_64.deb
-  - sudo dpkg -i bazel_${BAZEL_VERSION}-linux-x86_64.deb
+  - wget --no-clobber "https://github.com/bazelbuild/bazel/releases/download/0.4.5/bazel-0.4.5-installer-linux-x86_64.sh"
+  - chmod +x bazel-0.4.5-installer-linux-x86_64.sh
+  - ./bazel-0.4.5-installer-linux-x86_64.sh --user
+  - export PATH="$PATH:$HOME/bin"
   - sudo apt-get -f install -qqy uuid-dev
   - pwd
   - ls
   - cd ${TRAVIS_BUILD_DIR}
   - pwd
   - ls
-  - ls -l
   - mv tools/bazel.rc tools/bazel.rc.orig
   - cat tools/bazel.rc.travis tools/bazel.rc.orig > tools/bazel.rc
 

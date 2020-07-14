@@ -39,6 +39,10 @@ before_install:
     - alias python=python3
     - sed -i '/--action_env=PATH \\/a\  --host_javabase=@bazel_tools//tools/jdk:jdk \\' compile.sh
     - bash ./compile.sh
+    - sudo apt-get -f install -qqy uuid-dev
+    - cd ${TRAVIS_BUILD_DIR}
+    - mv tools/bazel.rc tools/bazel.rc.orig
+    - cat tools/bazel.rc.travis tools/bazel.rc.orig > tools/bazel.rc
     
 
 script:

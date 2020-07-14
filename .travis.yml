@@ -1,13 +1,6 @@
 sudo: required
 
-arch: 
-  - ppc64le
-
-addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-
+dist: trusty
 
 branches:
   except:
@@ -15,11 +8,8 @@ branches:
 
 language: cpp
 
-jdk:
-  - oraclejdk8
-
 env:
-  - BAZEL_VERSION=0.4.5
+  - BAZEL_VERSION=3.0.0
 
 cache:
   directories:
@@ -28,29 +18,36 @@ cache:
     - $HOME/clang
 
 before_install:
-  - sudo apt-get update
-  - sudo apt-get -y install software-properties-common
-  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/ppa
-  - sudo apt-get update
-  - sudo apt-get install -y gcc-4.9 g++-4.9
-  - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 60 --slave /usr/bin/g++ g++ /usr/bin/g++-4.9
-  - sudo apt-get install wget
-  - sudo apt-get install realpath
-  - sudo apt-get install pkg-config zip zlib1g-dev unzip python
-  - mkdir -p ${HOME}/bazel/install
-  - cd ${HOME}/bazel/install
-  - wget --no-clobber "https://github.com/bazelbuild/bazel/releases/download/0.4.5/bazel-0.4.5-installer-linux-x86_64.sh"
-  - chmod +x bazel-0.4.5-installer-linux-x86_64.sh
-  - ./bazel-0.4.5-installer-linux-x86_64.sh --user
-  - export PATH="$PATH:$HOME/bin"
-  - sudo apt-get -f install -qqy uuid-dev
-  - pwd
-  - ls
-  - cd ${TRAVIS_BUILD_DIR}
-  - pwd
-  - ls
-  - mv tools/bazel.rc tools/bazel.rc.orig
-  - cat tools/bazel.rc.travis tools/bazel.rc.orig > tools/bazel.rc
+    - apt-get update -y 
+    - apt-get install -y --no-install-recommends \
+    - openjdk-8-jdk \- 
+    - wget-  \
+    - curl-  \
+    - unzi- p \
+    - zip-  \
+    - git-  \
+    - rsy- nc \
+    - pyt- hon-dev \
+    - swi- g \
+    - lib- atlas-dev \
+    - pyt- hon-numpy \
+    - lib- openblas-dev \
+    - lib- curl3-dev \
+    - libfreetype6-dev \
+    - lib- zmq3-dev \
+    - lib- hdf5-dev \
+    - g++-  \
+    - curl \
+    - pat- ch \
+    - pyt- hon-pip
+   --  mkdir bazel && cd bazel
+    - - curl -fSsL -O https://github.com/bazelbuild/bazel/releases/download/3.0.0/bazel-3.0.0-dist.zip
+    - unzip bazel-3.0.0-dist.zip
+
+    - apt-get install python3
+    - alias python=python3
+    - sed -i '/--action_env=PATH \\/a\  --host_javabase=@bazel_tools//tools/jdk:jdk \\' compile.sh
+    - bash ./compile.sh
 
 script:
   - script/check-style

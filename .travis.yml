@@ -6,6 +6,10 @@ arch: ppc64le
 branches:
   except:
   - stable
+  
+ jdk:
+  - openjdk-8-jdk
+
 
 language: cpp
 

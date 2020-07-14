@@ -4,15 +4,17 @@ dist: trusty
 arch: ppc64le
 
 
- jdk:
-  - openjdk-8-jdk
-
 branches:
   except:
   - stable
   
 
 language: cpp
+
+
+ jdk:
+  - openjdk-8-jdk
+
 
 env:
   - BAZEL_VERSION=0.4.5

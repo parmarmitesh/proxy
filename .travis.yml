@@ -11,6 +11,10 @@ branches:
 
 language: cpp
 
+jdk:
+  - openjdk-8-jdk
+
+
 
 env:
   - BAZEL_VERSION=0.4.5

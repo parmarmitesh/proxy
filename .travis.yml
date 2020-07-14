@@ -10,7 +10,7 @@ branches:
 language: cpp
 
 env:
-  - BAZEL_VERSION=3.0.0
+  - BAZEL_VERSION=2.0.0
 
 cache:
   directories:
